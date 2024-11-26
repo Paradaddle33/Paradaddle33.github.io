@@ -3,7 +3,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f4f8;
-    color: #333;
+    color: #418a1f;
     margin: 0;
     padding: 0;
 }
@@ -93,8 +93,9 @@ ul li a:hover {
 
 .photo-box {
     display: flex;
-    justify-content: space-around;
+    justify-content: auto;
     margin-top: 20px;
+    text-align: center;
 }
 
 footer {
@@ -106,3 +107,4 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
