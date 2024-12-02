@@ -120,12 +120,21 @@
           "discount"
         ).innerText = `Total Discount: $${discount.toFixed(2)}`;
       }
+
+      function showDiscountOnSubmit() {
+        calculateTotal();
+        alert(document.getElementById("discount").innerText);
+      }
     </script>
   </head>
   <body class="form-body">
     <div class="form-container">
       <h2>Manno's Music Signup</h2>
-      <form action="payment.html" method="get">
+      <form
+        action="payment.html"
+        method="get"
+        onsubmit="showDiscountOnSubmit()"
+      >
         <div class="form-group">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required />
@@ -160,7 +169,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="Exp">Experience Level:</label>
+          <label for="Experience">Experience Level:</label>
           <select id="Experience" name="Experience" required>
             <option value="Beginner">Beginner</option>
             <option value="Novice">Novice</option>
