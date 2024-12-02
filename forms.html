@@ -1,168 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manno's Music Signup</title>
     <style>
-        /* styles.css */
+      /* styles.css */
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      .form-body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            width: 350px;
-        }
+      .form-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 350px;
+        text-align: center;
+      }
 
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6a11cb;
-        }
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #6a11cb;
+      }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+      .form-group {
+        margin-bottom: 20px;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+      }
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
 
-        .form-group input[type="radio"] {
-            width: auto;
-        }
+      .form-group input[type="radio"] {
+        width: auto;
+      }
 
-        .form-group .radio-group {
-            display: flex;
-            justify-content: space-around;
-        }
+      .form-group .radio-group {
+        display: flex;
+        justify-content: space-around;
+      }
 
-        .form-group .radio-group label {
-            margin-right: 10px;
-        }
+      .form-group .radio-group label {
+        margin-right: 10px;
+      }
 
-        .form-group button {
-            width: 100%;
-            padding: 12px;
-            background-color: #6a11cb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .form-group button {
+        width: 100%;
+        padding: 12px;
+        background-color: #6a11cb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .form-group button:hover {
-            background-color: #2575fc;
-        }
+      .form-group button:hover {
+        background-color: #2575fc;
+      }
 
-        .form-group .total-box {
-            text-align: center;
-            margin-top: 20px;
-        }
+      .form-group .total-box {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .discount-label {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #ff0000;
+      }
     </style>
     <script>
-        function calculateTotal() {
-            const sessionDuration = document.getElementById('session-duration').value;
-            const ratePerHour = 20;
-            let total = 0;
+      function calculateTotal() {
+        const sessionDuration =
+          document.getElementById("session-duration").value;
+        const rates = { 0.5: 10, 1: 20, 2: 40 };
+        let total = 0;
+        let discount = 0;
 
-            switch (sessionDuration) {
-                case '0.5':
-                    total = 0.5 * ratePerHour;
-                    break;
-                case '1':
-                    total = 1 * ratePerHour;
-                    break;
-                case '2':
-                    total = 2 * ratePerHour;
-                    break;
-                default:
-                    total = 0;
-            }
-
-            document.getElementById('total').value = `$${total.toFixed(2)}`;
+        switch (sessionDuration) {
+          case "0.5":
+            total = 0.5 * rates["0.5"];
+            break;
+          case "1":
+            total = 1 * rates["1"];
+            break;
+          case "2":
+            total = 2 * rates["2"] * 0.9; // Applying a 10% discount
+            discount = 2 * rates["2"] * 0.1; // 10% of the 2-hour rate
+            break;
+          default:
+            total = 0;
         }
+
+        document.getElementById("total").value = `$${total.toFixed(2)}`;
+        document.getElementById(
+          "discount"
+        ).innerText = `Total Discount: $${discount.toFixed(2)}`;
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body class="form-body">
     <div class="form-container">
-        <h2>Manno's Music Signup</h2>
-        <form action="payment.html" method="get">
-            <div class="form-group"> 
-                <label for="username">Username:</label> 
-                <input type="text" id="username" name="username" required> 
-            </div> 
-            <div class="form-group"> 
-                <label for="password">Password:</label> 
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="instrument">Type of Instrument:</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="instrument" value="Guitar"> Guitar</label>
-                    <label><input type="radio" name="instrument" value="Piano"> Piano</label>
-                    <label><input type="radio" name="instrument" value="Drums"> Drums</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="Exp">Experience Level:</label>
-                <select id="Experience" name="Experience" required>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Novice">Novice</option>
-                    <option value="Advanced">Advanced</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="session-duration">Session Duration:</label>
-                <select id="session-duration" name="session-duration" required>
-                    <option value="0.5">1/2 Hour</option>
-                    <option value="1">1 Hour</option>
-                    <option value="2">2 Hours</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="button" onclick="calculateTotal()">Calculate</button>
-            </div>
-            <div class="form-group total-box">
-                <label for="total">Total Cost:</label>
-                <input type="text" id="total" name="total" readonly>
-            </div>
-            <div class="form-group">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+      <h2>Manno's Music Signup</h2>
+      <form action="payment.html" method="get">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="instrument">Type of Instrument:</label>
+          <div class="radio-group">
+            <label
+              ><input type="radio" name="instrument" value="Guitar" />
+              Guitar</label
+            >
+            <label
+              ><input type="radio" name="instrument" value="Piano" />
+              Piano</label
+            >
+            <label
+              ><input type="radio" name="instrument" value="Drums" />
+              Drums</label
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Exp">Experience Level:</label>
+          <select id="Experience" name="Experience" required>
+            <option value="Beginner">Beginner</option>
+            <option value="Novice">Novice</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="session-duration">Session Duration:</label>
+          <select
+            id="session-duration"
+            name="session-duration"
+            required
+            onchange="calculateTotal()"
+          >
+            <option value="0.5">1/2 Hour ($10/hour)</option>
+            <option value="1">1 Hour ($20/hour)</option>
+            <option value="2">2 Hours ($40/hour)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="button" onclick="calculateTotal()">Calculate</button>
+        </div>
+        <div class="form-group total-box">
+          <label for="total">Total Cost:</label>
+          <input type="text" id="total" name="total" readonly />
+        </div>
+        <div id="discount" class="discount-label"></div>
+        <div class="form-group">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     </div>
-</body>
+  </body>
 </html>
